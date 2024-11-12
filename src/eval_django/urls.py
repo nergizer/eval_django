@@ -21,6 +21,6 @@ import competences
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('competences/', include('competences.urls')),
+    path('competences/', include('competences.urls','competences')),
 
 ]

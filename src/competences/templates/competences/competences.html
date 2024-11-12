@@ -5,9 +5,14 @@
 
 <h1>Liste des compétences</h1>
 
-{% for c in competences %}
 
-{% endfor %}
+<form action="{% url 'competences:competences' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit">
+</form>
+
+
 
 
 {% endblock %}

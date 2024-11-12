@@ -1,0 +1,21 @@
+{% extends "competences/main.html" %}
+
+
+{% block content %}
+
+
+<div class="card m-4">
+    <div class="card-body">
+        <h5 class="card-title">Vos compétences</h5>
+        <p class="card-text">
+        <ul>
+            {% for c in competences %}
+                  <li><strong>{{ c.nom }}</strong></li>
+            {% endfor %}
+        </ul>
+        </p>
+        <a class="btn btn-link" href="{% url 'competences:competences'%}">Modifier vos compétences</a>
+    </div>
+</div>
+
+{% endblock %}

@@ -9,10 +9,10 @@
 
 <body>
 
-    <header class="sticky-top d-flex flex-column">
+    <header class="sticky-top d-flex flex-column p-1">
         <div class="align-self-end">
             {% if user.is_authenticated %}
-            <p>{{ user.get_username }} - <a class="btn btn-primary">Profil</a> - <a class="btn btn-secondary" href="/competences/logout">Déconnexion</a></p>
+            <p>{{ user.get_username }} - <a href="{% url 'competences:profil' %}" class="btn btn-primary">Profil</a> - <a class="btn btn-secondary" href="/competences/logout">Déconnexion</a></p>
     {% else %}
             <a href="{% url 'competences:login' %}" class="btn btn-primary">Login</a>
     {% endif %}
@@ -26,8 +26,8 @@
 
     {% endif %}
 
-
+<main class="m-1">
 {% block content %}{% endblock %}
-
+</main>
 </body>
 </html>
