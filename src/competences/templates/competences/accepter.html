@@ -6,7 +6,7 @@
 <h1>Accepter cette requête ?</h1>
 
 
-<form action="{% url 'competences:accepter' %}" method="post">
+<form action="{% url 'competences:accepter' req_id=req_id %}" method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <input class="btn btn-primary" type="submit" value="Accepter">

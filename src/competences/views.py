@@ -23,7 +23,7 @@ def index(request):
                   {
                       "requetes_self" : Requete.objects.filter(owner=usr),
                       "requetes_available": Requete.objects.exclude(owner=usr)
-                  .filter(competence__in=usr.competences.all(),date__gt=datetime.datetime.now())
+                    .filter(competence__in=usr.competences.all(),date__gte=datetime.datetime.now())
 
                   })
 
@@ -49,14 +49,15 @@ def accepter(request,req_id : int):
         if form.is_valid():
             prof = UserProfile.get_for_user(request.user)
             req = Requete.objects.get(pk=req_id)
-            if req.date >= datetime.datetime.now() and req.assigned is None and prof.competences.contains(req.competence):
-                req.assigned = request.user
+            if req.date >= datetime.date.today() and req.assigned is None and prof.competences.contains(req.competence):
+                req.assigned = prof
+                req.save()
                 return HttpResponseRedirect("/competences")
 
         raise BadRequest()
     else:
         form = ConfirmForm()
-        return render(request,"competences/accepter.html", {"form" : form})
+        return render(request,"competences/accepter.html", {"form" : form,"req_id" : req_id})
 
 def requete(request):
     if not request.user.is_authenticated:

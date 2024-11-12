@@ -7,6 +7,25 @@
 {% if user.is_authenticated %}
 <h2> Demandes pertinentes </h2>
 
+ {% for req in requetes_available %}
+
+    <div class="card m-2" style="width: 24rem;">
+        <div class="card-body">
+            <h5 class="card-title">{{ req.description }}</h5>
+            <h6 class="card-subtitle mb-2 text-body-secondary">{{ req.competence }}</h6>
+            <p class="card-text">
+                {% if req.assigned %}
+                    De {{ req.owner.name }}
+                {% endif %}
+            </p>
+            <a href="{% url 'competences:accepter' req_id=req.id %}" class="card-link">Accepter</a>
+
+        </div>
+    </div>
+
+
+    {% endfor %}
+
 <h2> Mes demandes <a class="btn btn-link" href="{% url 'competences:requete' %}">+ Ajouter</a></h2>
 
 <div class="d-flex flex-row">
