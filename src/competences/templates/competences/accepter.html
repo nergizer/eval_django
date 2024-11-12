@@ -1,0 +1,19 @@
+{% extends "competences/main.html" %}
+
+
+{% block content %}
+
+<h1>Accepter cette requête ?</h1>
+
+
+<form action="{% url 'competences:accepter' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input class="btn btn-primary" type="submit" value="Accepter">
+    <a class="btn btn-secondary" href="/competences">Refuser</a>
+</form>
+
+
+
+
+{% endblock %}

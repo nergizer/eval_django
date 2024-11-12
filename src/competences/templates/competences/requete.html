@@ -1,0 +1,19 @@
+{% extends "competences/main.html" %}
+
+
+{% block content %}
+
+<h1>Créer une requête</h1>
+
+
+<form action="{% url 'competences:requete' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input class="btn btn-primary" type="submit" value="Ajouter">
+</form>
+
+
+
+
+
+{% endblock %}
