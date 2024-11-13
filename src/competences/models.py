@@ -37,6 +37,10 @@ class Requete(Model):
     date = models.DateField()
     competence = models.ForeignKey(to=Competence,on_delete=models.CASCADE)
     owner = models.ForeignKey(to=UserProfile,on_delete=models.CASCADE)
-    assigned = models.ForeignKey(to=UserProfile, on_delete=models.CASCADE,related_name="assigned", null=True)
+    assigned = models.ForeignKey(to=UserProfile, on_delete=models.CASCADE,related_name="assigned", blank=True, null=True )
 
+
+
+    def __str__(self):
+        return self.description + ": " + str(self.competence) + ", le " + str(self.date)
 
