@@ -23,9 +23,9 @@ def index(request):
     return render(request, "competences/index.html",
                   {
                       "requetes_self": Requete.objects.filter(owner=usr).order_by("date"),
-                      "requetes_available": Requete.objects.exclude(owner=usr)
+                      "requetes_disponibles": Requete.objects.exclude(owner=usr)
                   .filter(competence__in=usr.competences.all(), date__gte=datetime.date.today()).order_by("date"),
-                      "requetes_current": Requete.objects.filter(assigned=usr, date__gte=datetime.date.today()).order_by("date")
+                      "requetes_acceptes": Requete.objects.filter(assigned=usr, date__gte=datetime.date.today()).order_by("date")
 
                   })
 
