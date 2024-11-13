@@ -8,6 +8,7 @@ app_name = "competences"
 urlpatterns = [
     path('',views.index,name='index'),
     path('accepter/<int:req_id>', views.accepter,name="accepter"),
+    path('profil/<int:uid>', views.profil_autre, name="profil_autre"),
 
     spath('login', views.LoginV.as_view()),
     spath('logout', views.logout_view),

@@ -1,0 +1,37 @@
+{% extends "competences/main.html" %}
+
+
+{% block title %}Compétences - Profil de {{ prof.user.username }}{% endblock %}
+
+{% block content %}
+
+
+
+{% if user.is_authenticated %}
+
+
+<div class="card m-4">
+    <div class="card-body">
+        <h4 class="card-title">{{ prof.user.username }}</h4>
+        <p class="card-text">
+            <label><strong>Nom: </strong> {{ prof.user.first_name }}</label> <br/>
+            <label><strong>Prénom: </strong> {{ prof.user.last_name }}</label> <br/>
+            <label><strong>Email: </strong> {{ prof.user.email }}</label> <br/>
+
+        <br/>
+
+        <h5>Compétences</h5>
+        <ul>
+            {% for c in competences %}
+            <li><strong>{{ c.nom }}</strong></li>
+            {% endfor %}
+        </ul>
+        <br/>
+
+        </p>
+    </div>
+</div>
+
+{% endif %}
+
+{% endblock %}
