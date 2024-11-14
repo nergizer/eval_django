@@ -20,13 +20,17 @@ def index(request):
         return render(request, "competences/index.html", {"competences" : Competence.objects.all(),"requetes_recentes" : Requete.objects.filter(assigned=None, date__gte=datetime.date.today())[:5].all()})
     usr = UserProfile.get_for_user(request.user)
 
+    requetes_self = Requete.objects.filter(owner=usr, date__gte=datetime.date.today()).order_by("date")
+    requetes_disponibles = Requete.objects.exclude(owner=usr).filter(competence__in=usr.competences.all(),
+                                                                     assigned=None,
+                                                                     date__gte=datetime.date.today()).order_by("date")
+    requetes_acceptes = Requete.objects.filter(assigned=usr,
+                                               date__gte=datetime.date.today()).order_by("date")
     return render(request, "competences/index.html",
                   {
-                      "requetes_self": Requete.objects.filter(owner=usr,date__gte=datetime.date.today()).order_by("date"),
-                      "requetes_disponibles": Requete.objects.exclude(owner=usr)
-                  .filter(competence__in=usr.competences.all(),assigned=None, date__gte=datetime.date.today()).order_by("date"),
-                      "requetes_acceptes": Requete.objects.filter(assigned=usr, date__gte=datetime.date.today()).order_by("date")
-
+                      "requetes_self": requetes_self,
+                      "requetes_disponibles": requetes_disponibles,
+                      "requetes_acceptes": requetes_acceptes
                   })
 
 
